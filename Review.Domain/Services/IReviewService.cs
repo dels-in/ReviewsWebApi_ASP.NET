@@ -18,6 +18,16 @@ public interface IReviewService
     /// <param name="productId">Id продукта</param>
     /// <returns></returns>
     Task<IEnumerable<Feedback?>> GetReviewAsync(int id, int productId);
+    
+    /// <summary>
+    /// Добавление отзыва
+    /// </summary>
+    /// <param name="productId">Id продукта</param>
+    /// <param name="userId">Id пользователя</param>
+    /// <param name="description">Текст отзыва</param>
+    /// <param name="grade">Оценка</param>
+    /// <returns></returns>
+    Task<bool> TryAddReviewAsync(int productId, int userId, string description, int grade);
 
     /// <summary>
     /// Удаление отзыва

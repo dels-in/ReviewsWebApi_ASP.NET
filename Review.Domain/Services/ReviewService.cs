@@ -21,6 +21,28 @@ public class ReviewService : IReviewService
         return await _databaseContext.Feedbacks.Where(x => x.Id == id).ToListAsync();
     }
 
+    public async Task<bool> TryAddReviewAsync(int productId, int userId, string description, int grade)
+    {
+        try
+        {
+            var feedback = new Feedback
+            {
+                ProductId = productId,
+                UserId = userId,
+                Text = description,
+                Grade = grade,
+                CreateDate = DateTime.Now,
+                Status = Status.None
+            };
+            _databaseContext.Feedbacks.Add(feedback);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
     public async Task<bool> TryToDeleteReviewAsync(int id)
     {
         try

@@ -57,6 +57,27 @@ public class ReviewController : ControllerBase
     }
 
     /// <summary>
+    /// Add review 
+    /// </summary>
+    /// <returns></returns>
+    [HttpPost("AddReview")]
+    public async Task<ActionResult<List<Feedback>>> AddReviewAsync(int productId, int userId, string description, int grade)
+    {
+        try
+        {
+            var result = await _reviewService.TryAddReviewAsync(productId, userId, description, grade);
+            if (result)
+                return Ok();
+            return BadRequest(result);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message, e);
+            return BadRequest(new { Error = e.Message });
+        }
+    }
+    
+    /// <summary>
     /// �������� ������ �� id
     /// </summary>
     /// <returns></returns>
