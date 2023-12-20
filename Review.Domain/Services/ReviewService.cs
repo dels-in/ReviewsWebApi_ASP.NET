@@ -12,14 +12,14 @@ public class ReviewService : IReviewService
         _databaseContext = databaseContext;
     }
 
-    public async Task<List<Feedback>> GetFeedbacksByProductIdAsync(int id)
+    public async Task<List<Feedback>> GetAllAsync()
     {
         return await _databaseContext.Feedbacks.ToListAsync();
     }
 
-    public async Task<IEnumerable<Feedback?>> GetReviewAsync(int id, int productId)
+    public async Task<IEnumerable<Feedback?>> GetByProductIdAsync(int productId)
     {
-        return await _databaseContext.Feedbacks.Where(x => x.Id == id).ToListAsync();
+        return await _databaseContext.Feedbacks.Where(x => x.ProductId == productId).ToListAsync();
     }
 
     public async Task<bool> TryAddReviewAsync(int productId, int userId, string description, int grade)

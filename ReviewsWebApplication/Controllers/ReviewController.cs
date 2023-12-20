@@ -22,12 +22,12 @@ public class ReviewController : ControllerBase
     /// ��������� ���� ������� �� ��������
     /// </summary>
     /// <returns></returns>
-    [HttpGet("GetFeedbacksByProductId")]
-    public async Task<ActionResult<List<Feedback>>> GetAllReviewsAsync(int id)
+    [HttpGet]
+    public async Task<ActionResult<List<Feedback>>> GetAllReviewsAsync()
     {
         try
         {
-            var result = await _reviewService.GetFeedbacksByProductIdAsync(id);
+            var result = await _reviewService.GetAllAsync();
             return Ok(result);
         }
         catch (Exception e)
@@ -41,12 +41,12 @@ public class ReviewController : ControllerBase
     /// ��������� ������
     /// </summary>
     /// <returns></returns>
-    [HttpGet("GetReview")]
-    public async Task<ActionResult<List<Feedback>>> GetReviewAsync(int feedbackId, int productId)
+    [HttpGet]
+    public async Task<ActionResult<List<Feedback>>> GetReviewByProductIdAsync(int productId)
     {
         try
         {
-            var result = await _reviewService.GetReviewAsync(feedbackId, productId);
+            var result = await _reviewService.GetByProductIdAsync(productId);
             return Ok(result);
         }
         catch (Exception e)
