@@ -22,7 +22,7 @@ public class ReviewController : ControllerBase
     /// ��������� ���� ������� �� ��������
     /// </summary>
     /// <returns></returns>
-    [HttpGet]
+    [HttpGet ("GetAllReviews")]
     public async Task<ActionResult<List<Feedback>>> GetAllReviewsAsync()
     {
         try
@@ -41,8 +41,8 @@ public class ReviewController : ControllerBase
     /// ��������� ������
     /// </summary>
     /// <returns></returns>
-    [HttpGet]
-    public async Task<ActionResult<List<Feedback>>> GetReviewByProductIdAsync(int productId)
+    [HttpGet("GetReviewsByProductId")]
+    public async Task<ActionResult<List<Feedback>>> GetReviewsByProductIdAsync(int productId)
     {
         try
         {
