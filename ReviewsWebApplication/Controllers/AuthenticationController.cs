@@ -21,7 +21,7 @@ public class AuthenticationController : ControllerBase
         _logger = logger;
         this.loginService = loginService;
     }
-    [HttpPost("login")]
+    [HttpPost("Login")]
     public IActionResult Login([FromBody] Login user)
     {
         if (user is null)

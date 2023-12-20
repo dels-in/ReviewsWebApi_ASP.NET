@@ -30,7 +30,7 @@ public class CacheService : ICacheService
 
     public bool SetData<T>(string key, T value, DateTimeOffset expirationTime)
     {
-        TimeSpan expiryTime = expirationTime.DateTime.Subtract(DateTime.Now);
+        var expiryTime = expirationTime.DateTime.Subtract(DateTime.Now);
         var isSet = _db.StringSet(key, JsonConvert.SerializeObject(value), expiryTime);
         return isSet;
     }

@@ -69,7 +69,7 @@ namespace Review.Domain.Helper
         public static Login[] SetLogins()
         {
             var results = new List<Login>();
-            var login1 = new Login()
+            var login1 = new Login
             {  
                 Id = 1,
                 UserName = "admin", 
