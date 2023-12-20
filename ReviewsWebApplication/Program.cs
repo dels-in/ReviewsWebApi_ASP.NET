@@ -18,11 +18,7 @@ internal static class Program
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-        
-        var connection = builder.Configuration.GetConnectionString("Review");
-        builder.Services.AddDbContext<DataBaseContext>(options =>
-            options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
-        
+
         builder.Services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("V1", new OpenApiInfo
@@ -55,8 +51,10 @@ internal static class Program
                 }
             });
         });
-        var connectionString = builder.Configuration.GetConnectionString("Review_Database");
-        builder.Services.AddDbContext<DataBaseContext>(x => x.UseSqlServer(connectionString));
+        var connection = builder.Configuration.GetConnectionString("Review");
+        builder.Services.AddDbContext<DataBaseContext>(options =>
+            options.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+
         builder.Services.AddScoped<IReviewService, ReviewService>();
         builder.Services.AddScoped<ICacheService, CacheService>();
         builder.Services.AddScoped<LoginService>();
