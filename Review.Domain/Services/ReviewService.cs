@@ -52,6 +52,7 @@ public class ReviewService : IReviewService
                 Status = Status.None
             };
             _databaseContext.Feedbacks.Add(feedback);
+            await _databaseContext.SaveChangesAsync();
             return true;
         }
         catch (Exception)
