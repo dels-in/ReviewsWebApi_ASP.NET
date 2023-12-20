@@ -11,6 +11,7 @@ public class ReviewService : IReviewService
     {
         _databaseContext = databaseContext;
     }
+
     public async Task<List<Feedback>> GetFeedbacksByProductIdAsync(int id)
     {
         return await _databaseContext.Feedbacks.ToListAsync();
@@ -25,13 +26,29 @@ public class ReviewService : IReviewService
     {
         try
         {
+            var dateTime = DateTime.Now;
+
+            var rating = await _databaseContext.Ratings.FirstOrDefaultAsync(r => r.ProductId == productId);
+            if (rating == null)
+            {
+                rating = new Rating
+                {
+                    ProductId = productId,
+                    CreateDate = dateTime,
+                    Grade = grade,
+                };
+                _databaseContext.Ratings.Add(rating);
+            }
+
             var feedback = new Feedback
             {
                 ProductId = productId,
                 UserId = userId,
                 Text = description,
                 Grade = grade,
-                CreateDate = DateTime.Now,
+                CreateDate = dateTime,
+                RatingId = rating.Id,
+                Rating = rating,
                 Status = Status.None
             };
             _databaseContext.Feedbacks.Add(feedback);
