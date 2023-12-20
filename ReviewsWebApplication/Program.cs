@@ -1,14 +1,15 @@
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Web;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Review.Domain;
 using Review.Domain.Services;
-using System.Text;
 using ConfigurationManager = Review.Domain.Services.ConfigurationManager;
 
-internal class Program
+namespace ReviewsWebApplication;
+
+internal static class Program
 {
     private static void Main(string[] args)
     {
@@ -34,27 +35,32 @@ internal class Program
                 Description = "Bearer Authentication with JWT Token",
                 Type = SecuritySchemeType.Http
             });
-            options.AddSecurityRequirement(new OpenApiSecurityRequirement {
-        {
-            new OpenApiSecurityScheme {
-                Reference = new OpenApiReference {
-                    Id = "Bearer",
-                        Type = ReferenceType.SecurityScheme
+            options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Id = "Bearer",
+                            Type = ReferenceType.SecurityScheme
+                        }
+                    },
+                    new List<string>()
                 }
-            },
-            new List < string > ()
-        }
-    });
+            });
         });
         var connectionString = builder.Configuration.GetConnectionString("Review_Database");
         builder.Services.AddDbContext<DataBaseContext>(x => x.UseSqlServer(connectionString));
         builder.Services.AddScoped<IReviewService, ReviewService>();
         builder.Services.AddScoped<ICacheService, CacheService>();
         builder.Services.AddScoped<LoginService>();
-        builder.Services.AddAuthentication(opt => {
+        builder.Services.AddAuthentication(opt =>
+        {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
             opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer(options => {
+        }).AddJwtBearer(options =>
+        {
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuer = true,
@@ -63,7 +69,8 @@ internal class Program
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = ConfigurationManager.AppSetting["JWT:ValidIssuer"],
                 ValidAudience = ConfigurationManager.AppSetting["JWT:ValidAudience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Secret"]))
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Secret"]))
             };
         });
         var app = builder.Build();
@@ -71,10 +78,9 @@ internal class Program
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
-            app.UseSwaggerUI(options => {
-                options.SwaggerEndpoint("/swagger/V1/swagger.json", "Secret_WebAPI");
-            });
+            app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/V1/swagger.json", "Secret_WebAPI"); });
         }
+
         app.UseHttpsRedirection();
         app.UseAuthentication();
         app.UseAuthorization();

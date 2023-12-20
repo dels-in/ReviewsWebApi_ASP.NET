@@ -35,17 +35,19 @@
         /// </summary>
         public DateTime CreateDate { get; set; }
 
+        /// <summary>
+        /// Id рейтинга
+        /// </summary>
         public int RatingId { get; set; }
 
+        /// <summary>
+        /// Рейтинг
+        /// </summary>
         public Rating Rating { get; set; }
 
-        public Status status { get; set; }
+        /// <summary>
+        /// Статус отзыва
+        /// </summary>
+        public Status Status { get; set; }
     }
-}
-public enum Status
-{
-
-    None = 0,
-    Actual = 1,
-    Deleted = 2
 }

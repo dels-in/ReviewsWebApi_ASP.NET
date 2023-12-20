@@ -9,18 +9,18 @@ namespace Review.Domain.Helper
         {
             var count = 100;
             var random = new Random();
-            List<Feedback> result = new List<Feedback>(count);
-            for (int i = 1; i <= count; i++)
+            var result = new List<Feedback>(count);
+            for (var i = 1; i <= count; i++)
             {
-                Feedback f = CreateFeedback(random, i);
-                result.Add(f);
+                var feedback = CreateFeedback(random, i);
+                result.Add(feedback);
             }
             return result.ToArray();
         }
 
-        public static Feedback CreateFeedback(Random random, int i)
+        private static Feedback CreateFeedback(Random random, int i)
         {
-            return new Feedback()
+            return new Feedback
             {
                 Id = i,
                 CreateDate = DateTime.Now.AddDays(random.Next(-100, 0)),
@@ -29,7 +29,7 @@ namespace Review.Domain.Helper
                 Text = LoremIpsum.Substring(0, random.Next(20, 100)),
                 UserId = random.Next(1, 10), 
                 RatingId = random.Next(1, 10),
-                status = (Status)random.Next(0, 2)
+                Status = (Status)random.Next(0, 2)
             };
         }
 
@@ -37,33 +37,33 @@ namespace Review.Domain.Helper
         {
             var count = 100;
             var random = new Random();
-            List<Rating> result = new List<Rating>(count);
-            for (int i = 1; i <= count; i++)
+            var result = new List<Rating>(count);
+            for (var i = 1; i <= count; i++)
             {
-                Rating fff = CreateRating(random, i);
-                result.Add(fff);
+                var rating = CreateRating(random, i);
+                result.Add(rating);
             }
             return result.ToArray();
         }
 
-        public static Rating CreateRating(Random random, int i)
+        private static Rating CreateRating(Random random, int i)
         {
-            Feedback f = CreateFeedback(random, i);
-            var couuntF = random.Next(1, 10);
-            var feedbacs = new List<Feedback>(couuntF);
-            for (int k = 1; k <= couuntF; k++)
+            CreateFeedback(random, i);
+            var count = random.Next(1, 10);
+            var feedbacks = new List<Feedback>(count);
+            for (int k = 1; k <= count; k++)
             {
-                feedbacs.Add(CreateFeedback(random, k));
+                feedbacks.Add(CreateFeedback(random, k));
             }
-            var feedbacsAverage = feedbacs.Select(x => x.Grade).Average();
-            var fff = new Rating()
+            var feedbacksAverage = feedbacks.Select(x => x.Grade).Average();
+            var rating = new Rating
             {
                 Id = i,
                 CreateDate = DateTime.Now.AddDays(random.Next(-100, 0)),
                 ProductId = random.Next(1, 10),
-                Grade = Math.Round(feedbacsAverage, 2)
+                Grade = Math.Round(feedbacksAverage, 2)
             };
-            return fff;
+            return rating;
         }
 
         public static Login[] SetLogins()
