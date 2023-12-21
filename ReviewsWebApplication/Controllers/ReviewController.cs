@@ -22,12 +22,12 @@ public class ReviewController : ControllerBase
     /// ��������� ���� ������� �� ��������
     /// </summary>
     /// <returns></returns>
-    [HttpGet("GetFeedbacksByProductId")]
-    public async Task<ActionResult<List<Feedback>>> GetAllReviewsAsync(int id)
+    [HttpGet ("TryGetAll")]
+    public async Task<ActionResult<List<Feedback>>> TryGetAllAsync()
     {
         try
         {
-            var result = await _reviewService.GetFeedbacksByProductIdAsync(id);
+            var result = await _reviewService.GetAllAsync();
             return Ok(result);
         }
         catch (Exception e)
@@ -41,12 +41,12 @@ public class ReviewController : ControllerBase
     /// ��������� ������
     /// </summary>
     /// <returns></returns>
-    [HttpGet("GetReview")]
-    public async Task<ActionResult<List<Feedback>>> GetReviewAsync(int feedbackId, int productId)
+    [HttpGet("TryGetByProductId")]
+    public async Task<ActionResult<List<Feedback>>> TryGetByProductIdAsync(int productId)
     {
         try
         {
-            var result = await _reviewService.GetReviewAsync(feedbackId, productId);
+            var result = await _reviewService.GetByProductIdAsync(productId);
             return Ok(result);
         }
         catch (Exception e)
@@ -61,12 +61,12 @@ public class ReviewController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [Authorize]
-    [HttpDelete("DeleteReview")]
-    public async Task<ActionResult<List<Feedback>>> DeleteReviewAsync(int id)
+    [HttpDelete("TryDelete")]
+    public async Task<ActionResult<List<Feedback>>> TryDeleteAsync(int id)
     {
         try
         {
-            var result = await _reviewService.TryToDeleteReviewAsync(id);
+            var result = await _reviewService.TryDeleteAsync(id);
             if (result)
                 return Ok();
             return BadRequest(result);
