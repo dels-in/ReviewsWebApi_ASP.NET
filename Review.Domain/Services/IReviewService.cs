@@ -16,7 +16,7 @@ public interface IReviewService
     /// </summary>
     /// <param name="productId">Id продукта</param>
     /// <returns></returns>
-    Task<IEnumerable<Feedback?>> GetByProductIdAsync(int productId);
+    Task<List<Feedback>> GetByProductIdAsync(int productId);
     
     /// <summary>
     /// Добавление отзыва
