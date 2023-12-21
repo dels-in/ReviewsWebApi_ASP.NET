@@ -23,7 +23,7 @@ public class ReviewController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet ("TryGetAll")]
-    public async Task<ActionResult<List<Feedback>>> TryGetAllAsync()
+    public async Task<ActionResult<List<Review.Domain.Models.Review>>> TryGetAllAsync()
     {
         try
         {
@@ -42,7 +42,7 @@ public class ReviewController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("TryGetByProductId")]
-    public async Task<ActionResult<List<Feedback>>> TryGetByProductIdAsync(int productId)
+    public async Task<ActionResult<List<Review.Domain.Models.Review>>> TryGetByProductIdAsync(int productId)
     {
         try
         {
@@ -60,8 +60,8 @@ public class ReviewController : ControllerBase
     /// Add review 
     /// </summary>
     /// <returns></returns>
-    [HttpPost("AddReview")]
-    public async Task<ActionResult<List<Feedback>>> AddReviewAsync(int productId, int userId, string description, int grade)
+    [HttpPost("TryAdd")]
+    public async Task<ActionResult<List<Review.Domain.Models.Review>>> TryAddAsync(int productId, int userId, string description, int grade)
     {
         try
         {
@@ -83,7 +83,7 @@ public class ReviewController : ControllerBase
     /// <returns></returns>
     [Authorize]
     [HttpDelete("TryDelete")]
-    public async Task<ActionResult<List<Feedback>>> TryDeleteAsync(int id)
+    public async Task<ActionResult<List<Review.Domain.Models.Review>>> TryDeleteAsync(int id)
     {
         try
         {

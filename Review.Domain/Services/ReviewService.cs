@@ -12,14 +12,14 @@ public class ReviewService : IReviewService
         _databaseContext = databaseContext;
     }
 
-    public async Task<List<Feedback>> GetAllAsync()
+    public async Task<List<Models.Review>> GetAllAsync()
     {
-        return await _databaseContext.Feedbacks.ToListAsync();
+        return await _databaseContext.Reviews.ToListAsync();
     }
 
-    public async Task<List<Feedback>> GetByProductIdAsync(int productId)
+    public async Task<List<Models.Review>> GetByProductIdAsync(int productId)
     {
-        return await _databaseContext.Feedbacks.Where(x => x.ProductId == productId).ToListAsync();
+        return await _databaseContext.Reviews.Where(x => x.ProductId == productId).ToListAsync();
     }
 
     public async Task<bool> TryAddAsync(int productId, int userId, string description, int grade)
@@ -27,7 +27,7 @@ public class ReviewService : IReviewService
         try
         {
             var dateTime = DateTime.Now;
-            var grades = await _databaseContext.Feedbacks.Select(x => x.Grade).ToListAsync();
+            var grades = await _databaseContext.Reviews.Select(x => x.Grade).ToListAsync();
             grades.Add(grade);
             var gradesAverage = grades.Average();
 
@@ -49,7 +49,7 @@ public class ReviewService : IReviewService
                 await _databaseContext.SaveChangesAsync();
             }
 
-            var feedback = new Feedback
+            var feedback = new Models.Review
             {
                 ProductId = productId,
                 UserId = userId,
@@ -60,7 +60,7 @@ public class ReviewService : IReviewService
                 Rating = rating,
                 Status = Status.None
             };
-            _databaseContext.Feedbacks.Add(feedback);
+            _databaseContext.Reviews.Add(feedback);
             await _databaseContext.SaveChangesAsync();
             return true;
         }
@@ -74,8 +74,8 @@ public class ReviewService : IReviewService
     {
         try
         {
-            var review = await _databaseContext.Feedbacks.Where(x => x.Id == id).FirstOrDefaultAsync();
-            _databaseContext.Feedbacks.Remove(review!);
+            var review = await _databaseContext.Reviews.Where(x => x.Id == id).FirstOrDefaultAsync();
+            _databaseContext.Reviews.Remove(review!);
             await _databaseContext.SaveChangesAsync();
             return true;
         }

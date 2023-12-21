@@ -9,14 +9,14 @@ public interface IReviewService
     /// </summary>
     /// <param name="id">Id продукта</param>
     /// <returns></returns>
-    Task<List<Feedback>> GetAllAsync();
+    Task<List<Models.Review>> GetAllAsync();
 
     /// <summary>
     /// Получение отзывов по Id продукта
     /// </summary>
     /// <param name="productId">Id продукта</param>
     /// <returns></returns>
-    Task<List<Feedback>> GetByProductIdAsync(int productId);
+    Task<List<Models.Review>> GetByProductIdAsync(int productId);
     
     /// <summary>
     /// Добавление отзыва

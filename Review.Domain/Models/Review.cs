@@ -3,7 +3,7 @@
     /// <summary>
     /// Отзыв
     /// </summary>
-    public class Feedback
+    public class Review
     {
         /// <summary>
         /// Id отзыва
