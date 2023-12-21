@@ -23,13 +23,13 @@ public class DataBaseContext : DbContext
             .HasForeignKey(p => p.RatingId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        var feedbacks = Initialization.SetFeedbacks();
-        var rating = Initialization.SetRatings();
+        var feedbacks = Initialization.GetFeedbacks();
+        var ratings = Initialization.GetRatings();
 
         modelBuilder.Entity<Feedback>().HasData(feedbacks);
-        modelBuilder.Entity<Rating>().HasData(rating);
+        modelBuilder.Entity<Rating>().HasData(ratings);
 
-        Login[] login = Initialization.SetLogins();
-        modelBuilder.Entity<Login>().HasData(login);
+        var logins = Initialization.GetLogins();
+        modelBuilder.Entity<Login>().HasData(logins);
     }
 }
