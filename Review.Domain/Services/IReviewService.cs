@@ -5,24 +5,23 @@ namespace Review.Domain.Services;
 public interface IReviewService
 {
     /// <summary>
-    /// Получение всех отзывов по продукту
+    /// Получение всех отзывов
     /// </summary>
     /// <param name="id">Id продукта</param>
     /// <returns></returns>
-    Task<List<Feedback>> GetFeedbacksByProductIdAsync(int id);
+    Task<List<Feedback>> GetAllAsync();
 
     /// <summary>
-    /// Получение отзыва по его Id и Id продукта
+    /// Получение отзывов по Id продукта
     /// </summary>
-    /// <param name="id">Id отзыва</param>
     /// <param name="productId">Id продукта</param>
     /// <returns></returns>
-    Task<IEnumerable<Feedback?>> GetReviewAsync(int id, int productId);
-
+    Task<List<Feedback>> GetByProductIdAsync(int productId);
+    
     /// <summary>
     /// Удаление отзыва
     /// </summary>
     /// <param name="id">Id отзыва</param>
     /// <returns></returns>
-    Task<bool> TryToDeleteReviewAsync(int id);
+    Task<bool> TryDeleteAsync(int id);
 }
