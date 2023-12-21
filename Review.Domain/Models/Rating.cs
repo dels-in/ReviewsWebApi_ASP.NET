@@ -1,33 +1,32 @@
-﻿namespace Review.Domain.Models
+﻿namespace Review.Domain.Models;
+
+/// <summary>
+/// Рейтинг
+/// </summary>
+public class Rating
 {
     /// <summary>
-    /// Рейтинг
+    /// Id рейтинга
     /// </summary>
-    public class Rating
-    {
-        /// <summary>
-        /// Id рейтинга
-        /// </summary>
-        public int Id { get; set; }
+    public int Id { get; set; }
 
-        /// <summary>
-        /// Id продукта
-        /// </summary>
-        public int ProductId { get; set; }
+    /// <summary>
+    /// Id продукта
+    /// </summary>
+    public int ProductId { get; set; }
 
-        /// <summary>
-        /// Дата создания
-        /// </summary>
-        public DateTime CreateDate { get; set; }
+    /// <summary>
+    /// Дата создания
+    /// </summary>
+    public DateTime CreateDate { get; set; }
 
-        /// <summary>
-        /// Отзывы
-        /// </summary>
-        public List<Review> Feedbacks { get; set; } = new();
+    /// <summary>
+    /// Отзывы
+    /// </summary>
+    public List<Review> Feedbacks { get; set; } = new();
 
-        /// <summary>
-        /// Оценка
-        /// </summary>
-        public double Grade { get; set; }
-    }
+    /// <summary>
+    /// Оценка
+    /// </summary>
+    public double Grade { get; set; }
 }
