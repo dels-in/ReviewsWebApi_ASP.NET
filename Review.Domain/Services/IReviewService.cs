@@ -26,12 +26,12 @@ public interface IReviewService
     /// <param name="description">Текст отзыва</param>
     /// <param name="grade">Оценка</param>
     /// <returns></returns>
-    Task<bool> TryAddReviewAsync(int productId, int userId, string description, int grade);
+    Task<bool> TryAddAsync(int productId, int userId, string description, int grade);
 
     /// <summary>
     /// Удаление отзыва
     /// </summary>
     /// <param name="id">Id отзыва</param>
     /// <returns></returns>
-    Task<bool> TryToDeleteReviewAsync(int id);
+    Task<bool> TryDeleteAsync(int id);
 }

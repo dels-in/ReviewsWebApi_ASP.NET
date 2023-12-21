@@ -17,12 +17,12 @@ public class ReviewService : IReviewService
         return await _databaseContext.Feedbacks.ToListAsync();
     }
 
-    public async Task<IEnumerable<Feedback?>> GetByProductIdAsync(int productId)
+    public async Task<List<Feedback>> GetByProductIdAsync(int productId)
     {
         return await _databaseContext.Feedbacks.Where(x => x.ProductId == productId).ToListAsync();
     }
 
-    public async Task<bool> TryAddReviewAsync(int productId, int userId, string description, int grade)
+    public async Task<bool> TryAddAsync(int productId, int userId, string description, int grade)
     {
         try
         {
@@ -70,7 +70,7 @@ public class ReviewService : IReviewService
         }
     }
 
-    public async Task<bool> TryToDeleteReviewAsync(int id)
+    public async Task<bool> TryDeleteAsync(int id)
     {
         try
         {
