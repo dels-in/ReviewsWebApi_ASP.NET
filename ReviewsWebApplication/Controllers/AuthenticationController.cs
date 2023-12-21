@@ -14,14 +14,14 @@ namespace ReviewsWebApplication.Controllers;
 public class AuthenticationController : ControllerBase
 {
     private readonly ILogger<ReviewController> _logger;
-    private readonly LoginService loginService;
+    private readonly ILoginService _loginService;
 
-    public AuthenticationController(ILogger<ReviewController> logger, LoginService loginService)
+    public AuthenticationController(ILogger<ReviewController> logger, ILoginService loginService)
     {
         _logger = logger;
-        this.loginService = loginService;
+        _loginService = loginService;
     }
-    [HttpPost("login")]
+    [HttpPost("Login")]
     public IActionResult Login([FromBody] Login user)
     {
         if (user is null)
@@ -29,7 +29,7 @@ public class AuthenticationController : ControllerBase
             return BadRequest("Invalid user request!!!");
         }
 
-        var result = loginService.CheckLogin(user);
+        var result = _loginService.CheckLogin(user);
         if (result)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigurationManager.AppSetting["JWT:Secret"]));
