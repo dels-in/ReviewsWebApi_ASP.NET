@@ -21,14 +21,13 @@
         public DateTime CreateDate { get; set; }
 
         /// <summary>
-        /// отзывы
+        /// Отзывы
         /// </summary>
-        public List<Feedback> Feedbacks { get; set; }
+        public List<Review> Reviews { get; set; } = new();
 
+        /// <summary>
+        /// Оценка
+        /// </summary>
         public double Grade { get; set; }
-        public Rating()
-        {
-            Feedbacks = new List<Feedback>();
-        }
     }
 }

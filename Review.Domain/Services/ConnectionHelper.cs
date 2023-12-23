@@ -1,19 +1,14 @@
 ﻿using StackExchange.Redis;
 
-namespace Review.Domain.Services
+namespace Review.Domain.Services;
+
+public class ConnectionHelper
 {
-    public class ConnectionHelper
+    static ConnectionHelper()
     {
-        static ConnectionHelper()
-        {
-            ConnectionHelper.lazyConnection = new Lazy<ConnectionMultiplexer>(() => {
-                return ConnectionMultiplexer.Connect(ConfigurationManager.AppSetting["RedisURL"]);
-            });
-        }
-        private static Lazy<ConnectionMultiplexer> lazyConnection;
-        public static ConnectionMultiplexer Connection
-        {
-            get => lazyConnection.Value;
-        }
+        _lazyConnection = new Lazy<ConnectionMultiplexer>(() => ConnectionMultiplexer.Connect(ConfigurationManager.AppSetting["RedisURL"]));
     }
+
+    private static Lazy<ConnectionMultiplexer> _lazyConnection;
+    public static ConnectionMultiplexer Connection => _lazyConnection.Value;
 }

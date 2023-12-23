@@ -1,7 +1,9 @@
-﻿namespace Review.Domain.Services
+﻿namespace Review.Domain.Services;
+
+public class JWTTokenResponse
 {
-    public class JWTTokenResponse
-    {
-        public string? Token { get; set; }
-    }
+    /// <summary>
+    /// Токен
+    /// </summary>
+    public string? Token { get; set; }
 }
