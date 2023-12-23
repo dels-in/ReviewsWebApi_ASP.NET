@@ -1,14 +1,13 @@
 ﻿using Review.Domain.Models;
 
-namespace Review.Domain.Services
+namespace Review.Domain.Services;
+
+public interface ILoginService
 {
-    public interface ILoginService
-    {
-        /// <summary>
-        /// Проверить логин и пароль
-        /// </summary>
-        /// <param name="login">Логин</param>
-        /// <returns></returns>
-        bool CheckLogin(Login login);
-    }
+    /// <summary>
+    /// Проверить логин
+    /// </summary>
+    /// <param name="login">Логин</param>
+    /// <returns></returns>
+    bool CheckLogin(Login login);
 }
