@@ -1,5 +1,5 @@
-﻿using Review.Domain.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using Review.Domain.Models;
 
 namespace Review.Domain.Services;
 
