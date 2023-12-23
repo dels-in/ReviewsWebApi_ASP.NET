@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Review.Domain.Models;
 using Review.Domain.Services;
+using ReviewsWebApplication.Models;
 
 namespace ReviewsWebApplication.Controllers;
 
@@ -23,7 +23,7 @@ public class ReviewController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet ("TryGetAll")]
-    public async Task<ActionResult<List<Feedback>>> TryGetAllAsync()
+    public async Task<ActionResult<List<ReviewViewModel>>> TryGetAllAsync()
     {
         try
         {
@@ -42,7 +42,7 @@ public class ReviewController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("TryGetByProductId")]
-    public async Task<ActionResult<List<Feedback>>> TryGetByProductIdAsync(int productId)
+    public async Task<ActionResult<List<ReviewViewModel>>> TryGetByProductIdAsync(int productId)
     {
         try
         {
@@ -57,12 +57,33 @@ public class ReviewController : ControllerBase
     }
 
     /// <summary>
+    /// Add review 
+    /// </summary>
+    /// <returns></returns>
+    [HttpPost("TryAdd")]
+    public async Task<ActionResult<List<ReviewViewModel>>> TryAddAsync(int productId, int userId, string description, int grade)
+    {
+        try
+        {
+            var result = await _reviewService.TryAddAsync(productId, userId, description, grade);
+            if (result)
+                return Ok();
+            return BadRequest(result);
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e.Message, e);
+            return BadRequest(new { Error = e.Message });
+        }
+    }
+    
+    /// <summary>
     /// �������� ������ �� id
     /// </summary>
     /// <returns></returns>
     [Authorize]
     [HttpDelete("TryDelete")]
-    public async Task<ActionResult<List<Feedback>>> TryDeleteAsync(int id)
+    public async Task<ActionResult<List<ReviewViewModel>>> TryDeleteAsync(int id)
     {
         try
         {

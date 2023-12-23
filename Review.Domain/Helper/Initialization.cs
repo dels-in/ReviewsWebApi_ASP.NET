@@ -10,9 +10,9 @@ namespace Review.Domain.Helper
         private const int Capacity = 100;
         private static readonly Random _random = new();
 
-        public static Feedback[] GetFeedbacks()
+        public static Models.Review[] GetFeedbacks()
         {
-            var result = new List<Feedback>(Capacity);
+            var result = new List<Models.Review>(Capacity);
             for (var i = 1; i <= Capacity; i++)
             {
                 var feedback = CreateFeedback(i);
@@ -22,9 +22,9 @@ namespace Review.Domain.Helper
             return result.ToArray();
         }
 
-        private static Feedback CreateFeedback(int id)
+        private static Models.Review CreateFeedback(int id)
         {
-            return new Feedback
+            return new Models.Review
             {
                 Id = id,
                 CreateDate = DateTime.Now.AddDays(_random.Next(-100, 0)),
@@ -53,7 +53,7 @@ namespace Review.Domain.Helper
         {
             CreateFeedback(feedbackId);
             var randomCapacity = _random.Next(1, 10);
-            var feedbacks = new List<Feedback>(randomCapacity);
+            var feedbacks = new List<Models.Review>(randomCapacity);
             for (var id = 1; id <= randomCapacity; id++)
             {
                 feedbacks.Add(CreateFeedback(id));
@@ -75,7 +75,7 @@ namespace Review.Domain.Helper
             var users = new List<Login>();
             var admin = new Login
             {
-                Id = 0,
+                Id = 1,
                 UserName = "admin",
                 Password = "admin"
             };
