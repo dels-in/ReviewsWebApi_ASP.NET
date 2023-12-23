@@ -23,7 +23,7 @@
         /// <summary>
         /// Отзывы
         /// </summary>
-        public List<Review> Feedbacks { get; set; } = new();
+        public List<Review> Reviews { get; set; } = new();
 
         /// <summary>
         /// Оценка
