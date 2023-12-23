@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Review.Domain.Models;
 using Review.Domain.Services;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using AutoMapper;
+using Review.Domain.Models;
+using ReviewsWebApplication.Models;
 using ConfigurationManager = Review.Domain.Services.ConfigurationManager;
 
 namespace ReviewsWebApplication.Controllers;
@@ -13,22 +15,23 @@ namespace ReviewsWebApplication.Controllers;
 [ApiController]
 public class AuthenticationController : ControllerBase
 {
-    private readonly ILogger<ReviewController> _logger;
     private readonly ILoginService _loginService;
+    private readonly IMapper _mapper;
 
-    public AuthenticationController(ILogger<ReviewController> logger, ILoginService loginService)
+    public AuthenticationController(ILoginService loginService, IMapper mapper)
     {
-        _logger = logger;
         _loginService = loginService;
+        _mapper = mapper;
     }
     [HttpPost("Login")]
-    public IActionResult Login([FromBody] Login user)
+    public IActionResult Login([FromBody] LoginViewModel userViewModel)
     {
-        if (user is null)
+        if (userViewModel is null)
         {
             return BadRequest("Invalid user request!!!");
         }
 
+        var user = _mapper.Map<Login>(userViewModel);
         var result = _loginService.CheckLogin(user);
         if (result)
         {

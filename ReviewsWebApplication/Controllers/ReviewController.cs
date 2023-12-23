@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Review.Domain.Models;
 using Review.Domain.Services;
+using ReviewsWebApplication.Models;
 
 namespace ReviewsWebApplication.Controllers;
 
@@ -23,7 +23,7 @@ public class ReviewController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet ("TryGetAll")]
-    public async Task<ActionResult<List<Review.Domain.Models.Review>>> TryGetAllAsync()
+    public async Task<ActionResult<List<ReviewViewModel>>> TryGetAllAsync()
     {
         try
         {
@@ -42,7 +42,7 @@ public class ReviewController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpGet("TryGetByProductId")]
-    public async Task<ActionResult<List<Review.Domain.Models.Review>>> TryGetByProductIdAsync(int productId)
+    public async Task<ActionResult<List<ReviewViewModel>>> TryGetByProductIdAsync(int productId)
     {
         try
         {
@@ -61,7 +61,7 @@ public class ReviewController : ControllerBase
     /// </summary>
     /// <returns></returns>
     [HttpPost("TryAdd")]
-    public async Task<ActionResult<List<Review.Domain.Models.Review>>> TryAddAsync(int productId, int userId, string description, int grade)
+    public async Task<ActionResult<List<ReviewViewModel>>> TryAddAsync(int productId, int userId, string description, int grade)
     {
         try
         {
@@ -83,7 +83,7 @@ public class ReviewController : ControllerBase
     /// <returns></returns>
     [Authorize]
     [HttpDelete("TryDelete")]
-    public async Task<ActionResult<List<Review.Domain.Models.Review>>> TryDeleteAsync(int id)
+    public async Task<ActionResult<List<ReviewViewModel>>> TryDeleteAsync(int id)
     {
         try
         {

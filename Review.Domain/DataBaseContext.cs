@@ -19,7 +19,7 @@ public class DataBaseContext : DbContext
     {
         modelBuilder.Entity<Models.Review>()
             .HasOne(p => p.Rating)
-            .WithMany(t => t.Feedbacks)
+            .WithMany(t => t.Reviews)
             .HasForeignKey(p => p.RatingId)
             .OnDelete(DeleteBehavior.Cascade);
 

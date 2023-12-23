@@ -1,9 +1,9 @@
-﻿namespace Review.Domain.Models;
+﻿namespace ReviewsWebApplication.Models;
 
 /// <summary>
 /// Рейтинг
 /// </summary>
-public class Rating
+public class RatingViewModel
 {
     /// <summary>
     /// Id рейтинга
@@ -23,7 +23,7 @@ public class Rating
     /// <summary>
     /// Отзывы
     /// </summary>
-    public List<Review> Reviews { get; set; } = new();
+    public List<ReviewViewModel> Feedbacks { get; set; } = new();
 
     /// <summary>
     /// Оценка
